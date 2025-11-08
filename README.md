@@ -8,7 +8,7 @@ A professional marketing site developed by **MediaFluent** for **Servicios El Pa
 [![Status](https://img.shields.io/badge/status-in%20development-yellow.svg)](https://github.com/thesmashcoder/servicios-elpaisano)
 [![Client](https://img.shields.io/badge/client-Servicios%20El%20Paisano-blue.svg)]()
 [![Agency](https://img.shields.io/badge/agency-MediaFluent-purple.svg)]()
-[![Lead](https://img.shields.io/badge/lead-Maurice%20(Mash)-green.svg)]()
+[![Lead](https://img.shields.io/badge/lead-Maurice-(The-Smash-Coder)-green.svg)]()
 
 </div>
 
