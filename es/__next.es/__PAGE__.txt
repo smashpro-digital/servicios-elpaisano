@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[97367,["/servicios-elpaisano/_next/static/chunks/ff1a16fafef87110.js","/servicios-elpaisano/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
+3:"$Sreact.suspense"
+0:{"buildId":"nA9BGqrtW-gXGDg_Z2MQj","rsc":["$","$1","c",{"children":[["$","section",null,{"className":"p-8 text-center","children":[["$","h2",null,{"className":"text-3xl font-semibold mb-2","children":"Bienvenidos a Servicios El Paisano"}],["$","p",null,{"className":"text-gray-700","children":"Conectando comunidades con servicios confiables. La versión en español estará disponible pronto."}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
+4:null
