@@ -1,6 +1,127 @@
+/* Basic global reset */
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #222;
-  background-color: #fff;
+  background-color: #ffffff;
+}
+
+/* Header layout */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1f252d; /* dark bar like current site */
+  color: #ffffff;
+}
+
+
+/* Title */
+.site-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.site-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-title a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation links */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.site-nav a:first-child {
+  margin-left: 0;
+}
+
+.site-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.site-nav a:hover {
+  text-decoration: underline;
+}
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+}
+/* Language toggle styled like a flag + label */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background-color: #2e3a46;
+}
+
+.flag-icon {
+  font-size: 1.1rem;
+}
+
+.lang-label {
+  font-size: 0.9rem;
+}
+.contact-actions {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  padding: 2rem;
+}
+
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.btn.primary {
+  background-color: #0b71d9;
+  color: #ffffff;
+}
+
+.btn.secondary {
+  background-color: #f2f4f7;
+  color: #222222;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.contact-address {
+  margin-top: 0.5rem;
+  color: #555;
+}
+.page-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+
+/* Simple main section styling */
+main {
+  padding: 2rem;
 }
