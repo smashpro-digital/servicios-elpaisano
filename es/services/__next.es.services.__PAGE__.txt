@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
 2:I[97367,["/servicios-elpaisano/_next/static/chunks/ff1a16fafef87110.js","/servicios-elpaisano/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
 3:"$Sreact.suspense"
-0:{"buildId":"ioZYTgR4yPoHdbh8rWzkc","rsc":["$","$1","c",{"children":[["$","section",null,{"className":"page-section","children":[["$","h2",null,{"children":"Servicios"}],["$","ul",null,{"children":[["$","li",null,{"children":"Envíos de dinero"}],["$","li",null,{"children":"Pago de cuentas"}],["$","li",null,{"children":"Preparación de impuestos"}],["$","li",null,{"children":"Otros servicios para la comunidad"}]]}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"iOVnEqJnhB57V4Bc3-ihL","rsc":["$","$1","c",{"children":[["$","section",null,{"className":"page-section","children":[["$","h2",null,{"children":"Servicios"}],["$","ul",null,{"children":[["$","li",null,{"children":"Envíos de dinero"}],["$","li",null,{"children":"Pago de cuentas"}],["$","li",null,{"children":"Preparación de impuestos"}],["$","li",null,{"children":"Otros servicios para la comunidad"}]]}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
 4:null
