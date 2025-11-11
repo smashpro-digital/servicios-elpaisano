@@ -1,5 +1,0 @@
-1:"$Sreact.fragment"
-2:I[97367,["/servicios-elpaisano/_next/static/chunks/ff1a16fafef87110.js","/servicios-elpaisano/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
-3:"$Sreact.suspense"
-0:{"buildId":"nA9BGqrtW-gXGDg_Z2MQj","rsc":["$","$1","c",{"children":[["$","section",null,{"className":"page-section","children":[["$","h2",null,{"children":"Our Services"}],["$","ul",null,{"children":[["$","li",null,{"children":"Money transfers"}],["$","li",null,{"children":"Bill payments"}],["$","li",null,{"children":"Tax preparation"}],["$","li",null,{"children":"Other community services"}]]}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
-4:null
