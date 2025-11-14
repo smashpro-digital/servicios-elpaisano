@@ -1,11 +1,9 @@
-// app/es/page.tsx
-export default function HomePageES() {
-  return (
-    <section className="page-section">
-      <h2>Bienvenidos a Servicios El Paisano</h2>
-      <p>
-        Conectando comunidades con servicios confiables. La versión en español estará disponible pronto.
-      </p>
-    </section>
-  );
+import { loadLegacyMain } from "../lib/loadLegacy";
+import LegacySection from "../components/LegacySection";
+
+export const metadata = { title: "Servicios El Paisano — Español" };
+
+export default async function EsHome() {
+  const html = await loadLegacyMain("espanol.html");
+  return <LegacySection html={html} />;
 }
