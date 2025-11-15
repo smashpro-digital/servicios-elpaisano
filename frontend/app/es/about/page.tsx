@@ -1,11 +1,9 @@
-export default function AboutPageES() {
-  return (
-    <section className="page-section">
-      <h2>Sobre Servicios El Paisano</h2>
-      <p>
-        Servicios El Paisano ha estado sirviendo a la comunidad con envíos de dinero,
-        preparación de impuestos y otros servicios esenciales. (Reemplazar con texto real.)
-      </p>
-    </section>
-  );
+import { loadLegacyMain } from "../../lib/loadLegacy";
+import LegacySection from "../../components/LegacySection";
+
+export const metadata = { title: "Acerca | Servicios El Paisano" };
+
+export default async function EsAbout() {
+  const html = await loadLegacyMain("acerca.html");
+  return <LegacySection html={html} />;
 }
