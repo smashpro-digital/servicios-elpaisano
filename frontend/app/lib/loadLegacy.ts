@@ -2,33 +2,68 @@ import { promises as fs } from "fs";
 import path from "path";
 
 /**
- * Loads a legacy HTML file from /public/legacy and returns only the "main" content.
- * It tries to slice everything between <!-- Main --> and <!-- Footer --> first;
- * if not found, returns the whole file body.
+ * Prefix for public assets when deployed to GitHub Pages vs localhost.
+ * In dev:   ""  -> /images/foo.jpg
+ * In prod:  "/servicios-elpaisano" -> /servicios-elpaisano/images/foo.jpg
+ */
+const basePrefix =
+  process.env.NODE_ENV === "production" ? "/servicios-elpaisano" : "";
+
+/**
+ * Rewrites legacy HTML asset URLs so they load from Next's public/ folder.
+ * - Root-leading paths:  /logo.png, /images/foo.jpg, /assets/css/main.css
+ * - Relative paths:      ./images/foo.jpg, images/foo.jpg, assets/js/app.js
+ * (Ignores http(s), mailto:, tel:, #anchors, data:)
+ */
+function rewriteAssetUrls(html: string): string {
+  // /something (but not //, http, mailto, tel, data)
+  html = html.replace(
+    /(src|href)=["']\/(?!\/)(?!https?:)(?!mailto:)(?!tel:)(?!data:)([^"']+)["']/gi,
+    (_m, attr, rest) => `${attr}="${basePrefix}/${rest}"`
+  );
+
+  // ./images/... or ./assets/...
+  html = html.replace(
+    /(src|href)=["']\.\/(images\/[^"']+|assets\/[^"']+)["']/gi,
+    (_m, attr, rel) => `${attr}="${basePrefix}/${rel}"`
+  );
+
+  // images/... or assets/...
+  html = html.replace(
+    /(src|href)=["'](images\/[^"']+|assets\/[^"']+)["']/gi,
+    (_m, attr, rel) => `${attr}="${basePrefix}/${rel}"`
+  );
+
+  return html;
+}
+
+/**
+ * Loads a legacy HTML file from /public/legacy and returns the "main" content,
+ * with asset URLs rewritten to work under Next.js + GitHub Pages.
  */
 export async function loadLegacyMain(filename: string): Promise<string> {
   const filePath = path.join(process.cwd(), "public", "legacy", filename);
   const raw = await fs.readFile(filePath, "utf8");
 
-  // Try to carve out the main area by comments present in the provided files
+  // Prefer between <!-- Main --> and <!-- Footer -->
   const startIdx = raw.indexOf("<!-- Main -->");
   const endIdx = raw.indexOf("<!-- Footer -->");
 
+  let section = raw;
   if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
-    return raw.slice(startIdx, endIdx);
-  }
-
-  // Fallback: try <div id="main">…</div>
-  const mainStart = raw.indexOf('id="main"');
-  if (mainStart !== -1) {
-    // crude wrap to the next closing </div> of the wrapper (keeps simple)
-    const wrapperStart = raw.lastIndexOf("<div", mainStart);
-    const wrapperEnd = raw.indexOf("</div>", mainStart);
-    if (wrapperStart !== -1 && wrapperEnd !== -1) {
-      return raw.slice(wrapperStart, wrapperEnd + 6);
+    section = raw.slice(startIdx, endIdx);
+  } else {
+    // Fallback: try an element with id="main"
+    const idMain = /<[^>]*id=["']main["'][^>]*>/i.exec(raw);
+    if (idMain) {
+      const openTagIdx = idMain.index!;
+      // naive close search (good enough for these static pages)
+      const closeIdx = raw.indexOf("</", openTagIdx);
+      if (closeIdx !== -1) {
+        section = raw.slice(openTagIdx, closeIdx + 2);
+      }
     }
   }
 
-  // Worst case: give the full HTML (will still render inside our layout)
-  return raw;
+  return rewriteAssetUrls(section);
 }
