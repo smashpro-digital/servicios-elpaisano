@@ -1,13 +1,9 @@
-export default function ServicesPage() {
-  return (
-    <section className="page-section">
-      <h2>Our Services</h2>
-      <ul>
-        <li>Money transfers</li>
-        <li>Bill payments</li>
-        <li>Tax preparation</li>
-        <li>Other community services</li>
-      </ul>
-    </section>
-  );
+import { loadLegacyMain } from "../lib/loadLegacy";
+import LegacySection from "../components/LegacySection";
+
+export const metadata = { title: "Services | Servicios El Paisano" };
+
+export default async function ServicesPage() {
+  const html = await loadLegacyMain("services.html");
+  return <LegacySection html={html} />;
 }
