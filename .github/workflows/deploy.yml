@@ -26,6 +26,10 @@ jobs:
         working-directory: ./frontend
         run: npm ci
 
+      - name: Sync legacy HTML & images
+        working-directory: ./frontend
+        run: npm run sync:legacy
+
       - name: Build static site
         working-directory: ./frontend
         run: npm run build:pages
