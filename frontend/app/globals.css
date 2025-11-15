@@ -86,9 +86,29 @@ main {
 .flag-icon {
   font-size: 1.1rem;
 }
+.flag-img {
+  border-radius: 2px;
+  object-fit: cover;
+  display: inline-block;
+}
 
 .lang-label {
   white-space: nowrap;
+}
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background-color: #27313c;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.lang-toggle:hover {
+  background-color: #324150;
 }
 
 /* ===== Contact sections & buttons ===== */
