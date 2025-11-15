@@ -13,6 +13,7 @@
 
 import { loadLegacyMain } from "./lib/loadLegacy";
 import LegacySection from "./components/LegacySection";
+import Banner from "./components/Banner";
 
 export const metadata = { title: "Servicios El Paisano" };
 
@@ -20,3 +21,4 @@ export default async function Page() {
   const html = await loadLegacyMain("index.html");
   return <LegacySection html={html} />;
 }
+
