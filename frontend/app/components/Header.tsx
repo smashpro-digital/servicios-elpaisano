@@ -18,9 +18,13 @@ export function Header() {
     toggleHref = pathname === "/" ? "/es" : `/es${pathname}`;
   }
 
-  const flagEmoji = isSpanish ? "🇬🇹" : "🇺🇸";
-  const labelText = isSpanish ? "Español" : "English";
-  const aria = isSpanish ? "Switch to English" : "Cambiar a español";
+  // const flagEmoji = isSpanish ? "🇬🇹" : "";
+  const flagEmoji = isSpanish ? "🇺🇸" : "🇬🇹";
+  // const labelText = isSpanish ? "Español" : "English";
+  const labelText = isSpanish ? "English" : "Español";
+  // const aria = isSpanish ? "Switch to English" : "Cambiar a español";
+  const aria = isSpanish ? "Cambiar a español" : "Switch to English";
+
 
   return (
     <header className="site-header">
@@ -35,7 +39,7 @@ export function Header() {
         </Link>
 
         <nav className="site-nav">
-          <Link href={isSpanish ? "/es" : "/"}>{isSpanish ? "Inicio" : "Home"}</Link>
+          {/* <Link href={isSpanish ? "/es" : "/"}>{isSpanish ? "Inicio" : "Home"}</Link> */}
           <Link href={isSpanish ? "/es/about" : "/about"}>
             {isSpanish ? "Nosotros" : "About"}
           </Link>
@@ -47,9 +51,16 @@ export function Header() {
           </Link>
 
           <Link href={toggleHref} className="lang-toggle" aria-label={aria}>
-            <span className="flag-icon">{flagEmoji}</span>
-            <span className="lang-label">{labelText}</span>
-          </Link>
+  <Image
+    src={isSpanish ? "/images/flag-icon-us.png" : "/images/flag-icon-gt.png"}
+    alt={isSpanish ? "English" : "Español"}
+    width={24}
+    height={16}
+    className="flag-img"
+  />
+  <span className="lang-label">{labelText}</span>
+</Link>
+
         </nav>
       </div>
     </header>
