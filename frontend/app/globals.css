@@ -47,6 +47,8 @@ main {
   align-items: center;
   justify-content: space-between;
 }
+/* Hide legacy #banner only on / (home) */
+body:has(main[data-page="home"]) #banner { display: none !important; }
 
 .site-logo {
   display: inline-flex;
@@ -70,7 +72,17 @@ main {
 .site-nav a:hover {
   text-decoration: underline;
 }
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
 
+.nav-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.9;
+}
 /* Language toggle pill */
 
 .lang-toggle {
