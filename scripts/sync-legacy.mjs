@@ -20,6 +20,53 @@ const PAGES = [
   // ["/contact.html", "contact.html"],
   // ["/contactenos.html", "contactenos.html"],
 ];
+// Add near top of the file
+const EXTRA_ASSETS = [
+  "/assets/css/main.css",
+  "/assets/js/browser.min.js",
+  "/assets/js/breakpoints.min.js",
+  "/assets/js/util.js",
+  "/assets/js/main.js",
+  "/assets/js/year.js",
+];
+
+function extractStyleUrls(html) {
+  const matches = [...html.matchAll(/url\((['"]?)(\/?(images|assets)\/[^'")]+)\1\)/gi)];
+  return [...new Set(matches.map(m => m[2].replace(/^\//, "")))];
+}
+
+async function downloadStyleUrls(html) {
+  const urls = extractStyleUrls(html);
+  for (const rel of urls) {
+    const outPath = path.join(process.cwd(), "frontend", "public", rel);
+    await fs.mkdir(path.dirname(outPath), { recursive: true });
+    const url = `${ORIGIN}/${rel}`;
+    try {
+      const bin = await fetchBin(url);
+      await fs.writeFile(outPath, bin);
+      console.log("✓ style asset", rel);
+    } catch (e) {
+      console.warn("⚠ style asset failed", rel, e.message);
+    }
+  }
+}
+async function fetchExtraAssets() {
+  for (const rel of EXTRA_ASSETS) {
+    const url = `${ORIGIN}${rel}`;
+    const outPath = path.join(process.cwd(), "frontend", "public", rel);
+    await fs.mkdir(path.dirname(outPath), { recursive: true });
+    try {
+      const bin = await fetchBin(url);
+      await fs.writeFile(outPath, bin);
+      console.log("✓ extra asset", rel);
+    } catch (e) {
+      console.warn("⚠ extra asset failed", rel, e.message);
+    }
+  }
+}
+
+// Call it in run() before writing pages
+await fetchExtraAssets();
 
 const LEGACY_DIR = path.join(process.cwd(), "frontend", "public", "legacy");
 const IMG_DIR = path.join(process.cwd(), "frontend", "public", "images");
@@ -100,6 +147,7 @@ async function run() {
     const url = `${ORIGIN}${remote}`;
     const html = await fetchText(url);
     await downloadImagesFrom(html);
+    await downloadStyleUrls(html);  
     await downloadAssetsFrom(html);    const rewritten = rewriteAssets(html);
     await fs.writeFile(path.join(LEGACY_DIR, localName), rewritten, "utf8");
     console.log("✓ page", remote);
