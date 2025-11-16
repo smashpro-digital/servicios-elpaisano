@@ -2,7 +2,7 @@ name: Build & Deploy (GitHub Pages)
 
 on:
   push:
-    branches: [ main ]   # pick your source branch
+    branches: [ main ]  # pick your source branch
   workflow_dispatch:
 
 permissions:
