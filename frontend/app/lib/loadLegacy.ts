@@ -6,15 +6,46 @@ const basePrefix =
 
 /** Remove any <script>…</script> or self-closing <script …/> blocks */
 function stripScripts(html: string): string {
-  // Remove normal <script> … </script>
   html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
-  // Remove self-closing <script ... />
   html = html.replace(/<script\b[^>]*\/>/gi, "");
   return html;
 }
 
-/** Rewrite asset URLs so they work from Next public/ and GitHub Pages basePath */
-function rewriteAssetUrls(html: string): string {
+/** Remove legacy CSS links under /assets (font-awesome, theme CSS) to avoid 404s */
+function stripLegacyLinks(html: string): string {
+  return html.replace(
+    /<link\b[^>]*href=["']\/?assets\/[^"']+["'][^>]*>/gi,
+    ""
+  );
+}
+/** Remove legacy <div id="banner">…</div> completely */
+export function stripLegacyBanner(html: string): string {
+  return html.replace(
+    /<div[^>]*id=["']banner["'][^>]*>[\s\S]*?<\/div>/i,
+    ""
+  );
+}
+/** Remove the legacy header block (<header id="header">…</header>) */
+function stripLegacyHeader(html: string): string {
+  return html.replace(
+    /<header[^>]*id=["']header["'][^>]*>[\s\S]*?<\/header>/i,
+    ""
+  );
+}
+
+/** Remove the legacy preload class toggled by old JS */
+function stripPreloadClass(html: string): string {
+  return html.replace(
+    /\sclass=["']([^"']*\s)?is-preload(\s[^"']*)?["']/gi,
+    (_m, pre = "", post = "") => {
+      const cleaned = `${(pre || "").trim()} ${(post || "").trim()}`.trim();
+      return cleaned ? ` class="${cleaned}"` : "";
+    }
+  );
+}
+
+/** Rewrite asset URLs in src/href attributes */
+function rewriteAttrUrls(html: string): string {
   // Root-leading (but not //, http(s), mailto, tel, data)
   html = html.replace(
     /(src|href)=["']\/(?!\/)(?!https?:)(?!mailto:)(?!tel:)(?!data:)([^"']+)["']/gi,
@@ -33,9 +64,17 @@ function rewriteAssetUrls(html: string): string {
   return html;
 }
 
+/** Rewrite URLs inside inline styles: background-image:url("images/...") etc. */
+function rewriteStyleUrls(html: string): string {
+  return html.replace(
+    /url\((['"]?)(\/?(images|assets)\/[^'")]+)\1\)/gi,
+    (_m, q, rel) => `url(${q}${basePrefix}/${rel.replace(/^\//, "")}${q})`
+  );
+}
+
 /**
  * Load legacy HTML from /public/legacy/<filename>,
- * slice the "main" section, strip legacy scripts, and rewrite asset URLs.
+ * slice the "main" section, strip legacy header/scripts/links, and rewrite URLs.
  */
 export async function loadLegacyMain(filename: string): Promise<string> {
   const filePath = path.join(process.cwd(), "public", "legacy", filename);
@@ -58,11 +97,15 @@ export async function loadLegacyMain(filename: string): Promise<string> {
     }
   }
 
-  // 1) Remove legacy <script> tags to avoid 404s & hydration mismatches
+  // Strip legacy stuff that collides with React/static hosting
+  section = stripLegacyHeader(section);
+  section = stripLegacyLinks(section);
   section = stripScripts(section);
+  section = stripPreloadClass(section);
 
-  // 2) Rewrite /images, /assets, images/, assets/ to include base path
-  section = rewriteAssetUrls(section);
+  // Rewrite asset urls in attributes and inline styles
+  section = rewriteAttrUrls(section);
+  section = rewriteStyleUrls(section);
 
   return section;
 }
