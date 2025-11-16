@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# Synced legacy payload (fetched at build time)
+frontend/public/legacy/**
+frontend/public/assets/**
+frontend/public/images/slide*.webp
+frontend/public/images/Santos-*.jpg
+frontend/public/images/Carmen-*.jpg
+
+# keep our own app assets (commit these)
+!frontend/public/logo-elpaisano.png
+!frontend/public/images/flags/**
