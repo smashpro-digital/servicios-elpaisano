@@ -1,29 +1,14 @@
-import { loadLegacyMain, stripLegacyBanner  } from "../lib/loadLegacy";
+import { loadLegacyMain, stripLegacyBanner } from "../lib/loadLegacy";
 import LegacySection from "../components/LegacySection";
-import Banner from "../components/Banner";
+import Banner from "../components/Banner"; // keep if you want the slider on ES too
 
-function stripLegacyBanner(html: string) {
-  // remove <div id="banner">...</div> (non-greedy, handles newlines)
-  return html.replace(/<div[^>]*id=["']banner["'][^>]*>[\s\S]*?<\/div>/i, "");
-}
-
-// export const metadata = { title: "Servicios El Paisano — Español" };
-
-// export default async function EsHome() {
-//   const html = await loadLegacyMain("espanol.html");
-//   return <LegacySection html={html} />;
-// }
-
-
-
-
-export const metadata = { title: "Servicios El Paisano" };
+export const metadata = { title: "Servicios El Paisano — Español" };
 
 export default async function Page() {
-  let html = await loadLegacyMain("index.html");
-  html = stripLegacyBanner(html);
+  let html = await loadLegacyMain("espanol.html");
+  html = stripLegacyBanner(html); // remove legacy #banner
 
-  // Point to the same images the legacy site uses
+  // Use same slides (or a Spanish set if you prefer)
   const slides = [
     "/images/slide00.webp",
     "/images/slide01.webp",
@@ -35,7 +20,7 @@ export default async function Page() {
 
   return (
     <>
-      <Banner images={slides} />
+      <Banner images={slides} height={460} />
       <LegacySection html={html} />
     </>
   );

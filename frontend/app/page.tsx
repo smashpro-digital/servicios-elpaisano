@@ -10,21 +10,16 @@
  // );
 //}
 
-
-import { loadLegacyMain, stripLegacyBanner  } from "./lib/loadLegacy";
+import { loadLegacyMain, stripLegacyBanner } from "./lib/loadLegacy";
 import LegacySection from "./components/LegacySection";
 import Banner from "./components/Banner";
 
 export const metadata = { title: "Servicios El Paisano" };
 
 export default async function Page() {
-  // 1) load legacy HTML
   let html = await loadLegacyMain("index.html");
+  html = stripLegacyBanner(html); // remove legacy #banner
 
-  // 2) remove the legacy #banner (with the "WELCOME TO OUR WEBSITE" overlay)
-  html = stripLegacyBanner(html);
-
-  // 3) React banner slides (make sure these files exist in /public/images/)
   const slides = [
     "/images/slide00.webp",
     "/images/slide01.webp",
