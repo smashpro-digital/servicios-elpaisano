@@ -1,4 +1,4 @@
-import { loadLegacyMain } from "../lib/loadLegacy";
+import { loadLegacyMain, stripLegacyBanner  } from "../lib/loadLegacy";
 import LegacySection from "../components/LegacySection";
 import Banner from "../components/Banner";
 
