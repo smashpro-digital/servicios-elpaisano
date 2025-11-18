@@ -64,7 +64,17 @@ body:has(main[data-page="home"]) #banner { display: none !important; }
   align-items: center;
   text-decoration: none; */
 }
+/* Make sure legacy CSS can't hide our shell header/nav */
+body > header.site-header {
+  display: block !important;
+  position: relative;
+  z-index: 50;
+}
 
+/* Desktop nav: always visible */
+body > header.site-header + nav.site-nav {
+  display: flex !important;
+}
 .site-nav {
   display: flex;
   align-items: center;
@@ -239,27 +249,44 @@ footer {
 }
 /* === Banner slider === */
 
+/* === React banner slider – override any legacy styles === */
+
 .mf-banner {
-  position: relative;
-  width: 100%;
+  position: relative !important;
+  width: 100% !important;
   max-width: 1100px;
   margin: 0 auto 2rem;
-  overflow: hidden;
+  overflow: hidden !important;
   border-bottom: 4px solid #0b325d;
   background: #0b1b2a;
+  height: 460px; /* desktop default */
+  z-index: 10;   /* sit above any legacy background layers */
 }
 
+/* Each slide layer */
 .mf-slide {
-  position: absolute;
+  position: absolute !important;
   inset: 0;
   opacity: 0;
   transition: opacity 0.7s ease-in-out;
+  pointer-events: none; /* banner itself stays non-interactive */
 }
 
+/* Only the active slide is visible */
 .mf-slide.is-active {
   opacity: 1;
 }
 
+/* Make sure legacy CSS cannot override images inside the banner */
+.mf-slide img,
+.mf-slide picture {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* Text overlay */
 .mf-banner-heading {
   position: absolute;
   inset: 0;
@@ -280,22 +307,25 @@ footer {
   text-shadow:
     0 0 5px #ffffff,
     0 0 20px rgba(255, 255, 255, 0.7);
+  margin: 0;
 }
 
 .mf-banner-heading p {
-  margin-top: 0.6rem;
+  margin: 0.6rem 0 0;
   color: #16324f;
   font-size: 1rem;
 }
 
+/* On mobile we only adjust height – everything else stays the same */
 @media (max-width: 768px) {
   .mf-banner {
-    height: 260px;
+    height: 260px !important;
   }
 
   .mf-banner-heading h1 {
     font-size: 1.7rem;
   }
 }
+
 
 }
