@@ -1,10 +1,52 @@
 // app/components/Header.tsx
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-/* simple inline SVG icons (no dependencies) */
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+// Simple inline SVG icons
+const AboutIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" />
+    <line x1="12" y1="10" x2="12" y2="16" stroke="currentColor" />
+    <circle cx="12" cy="7" r="1" fill="currentColor" />
+  </svg>
+);
+
+const ServicesIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" />
+    <path
+      d="M4.5 12h3M16.5 12h3M12 4.5v3M12 16.5v3"
+      fill="none"
+      stroke="currentColor"
+    />
+  </svg>
+);
+
+const ContactIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <rect
+      x="3.5"
+      y="5.5"
+      width="17"
+      height="13"
+      rx="1.5"
+      fill="none"
+      stroke="currentColor"
+    />
+    <polyline
+      points="4 7 12 12 20 7"
+      fill="none"
+      stroke="currentColor"
+    />
+  </svg>
+);
+
 function IconInfo(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" {...props}>

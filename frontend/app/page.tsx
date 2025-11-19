@@ -30,10 +30,17 @@ export default async function Page() {
   ];
 
   return (
+    // <>
+    //   <Banner images={slides} height={460} />
+    //   <LegacySection html={html} />
+    // </>
     <>
-      <Banner images={slides} height={460} />
-      <LegacySection html={html} />
-    </>
+    <Banner
+  images={slides}
+  height={460}
+  // heading="FILE YOUR 2025 INCOME TAX"
+/>
+<LegacySection html={html} /></>
   );
 }
 
