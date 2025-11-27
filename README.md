@@ -29,7 +29,7 @@ A professional marketing site developed by **MediaFluent** for **Servicios El Pa
 |------|---------|---------------|
 | 🧑‍💼 Client | Servicios El Paisano | End Client |
 | 🧑‍💻 Liaison / PM | Jim | MediaFluent |
-| 🧠 Tech Lead | Maurice (The Smash Coder) | MediaFluent |
+| 🧠 Tech Lead | Maurice (The Smash Coder) | SmashPro Digital LLC |
 | 🎨 Design / Content | TBD | MediaFluent + Client |
 
 ---
