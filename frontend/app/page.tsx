@@ -1,46 +1,50 @@
 // app/page.tsx
-//export default function HomePage() {
-  //return (
-    //<section className="page-section">
-    //  <h2>Welcome to Servicios El Paisano</h2>
-    //  <p>
-    //    Connecting communities with trusted services. The English version of the website is coming soon.
-   //   </p>
-  //  </section>
- // );
-//}
+import React, { useRef } from "react";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import { WebView } from "react-native-webview";
 
-import { loadLegacyMain, stripLegacyBanner } from "./lib/loadLegacy";
-import LegacySection from "./components/LegacySection";
-import Banner from "./components/Banner";
+const HOME_URL = "https://servicioselpaisano.com";
+const ALLOWED_HOSTS = new Set([
+  "servicioselpaisano.com",
+  "www.servicioselpaisano.com",
+]);
 
-export const metadata = { title: "Servicios El Paisano" };
-
-export default async function Page() {
-  let html = await loadLegacyMain("index.html");
-  html = stripLegacyBanner(html); // remove legacy #banner
-
-  const slides = [
-    "/images/slide00.webp",
-    "/images/slide01.webp",
-    "/images/slide02.webp",
-    "/images/slide03.webp",
-    "/images/slide04.webp",
-    "/images/slide05.webp",
-  ];
+export default function Page() {
+  const webviewRef = useRef<WebView>(null);
 
   return (
-    // <>
-    //   <Banner images={slides} height={460} />
-    //   <LegacySection html={html} />
-    // </>
-    <>
-    <Banner
-  images={slides}
-  height={460}
-  // heading="FILE YOUR 2025 INCOME TAX"
-/>
-<LegacySection html={html} /></>
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.container}>
+        <WebView
+          ref={webviewRef}
+          source={{ uri: HOME_URL }}
+          startInLoadingState
+          javaScriptEnabled
+          domStorageEnabled
+          allowsBackForwardNavigationGestures
+          setSupportMultipleWindows={false}
+          onShouldStartLoadWithRequest={(req) => {
+            // Allow phone/email links (review-friendly)
+            if (req.url.startsWith("tel:") || req.url.startsWith("mailto:")) {
+              return true;
+            }
+
+            // Keep only your domain inside the WebView
+            try {
+              const url = new URL(req.url);
+              return ALLOWED_HOSTS.has(url.hostname);
+            } catch {
+              // If parsing fails, allow (prevents accidental blocking)
+              return true;
+            }
+          }}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
+const styles = StyleSheet.create({
+  safe: { flex: 1 },
+  container: { flex: 1 },
+});
