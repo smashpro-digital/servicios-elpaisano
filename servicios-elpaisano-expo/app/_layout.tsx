@@ -1,24 +1,37 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect, useState } from "react";
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+SplashScreen.preventAutoHideAsync().catch(() => {
+  // ignore if it's already prevented
+});
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const [ready, setReady] = useState(false);
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+  useEffect(() => {
+    let isMounted = true;
+
+    const t = setTimeout(() => {
+      (async () => {
+        try {
+          if (!isMounted) return;
+          setReady(true);
+          await SplashScreen.hideAsync();
+        } catch {
+          // if hide fails, allow app to continue anyway
+          if (isMounted) setReady(true);
+        }
+      })();
+    }, 350);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(t);
+    };
+  }, []);
+
+  if (!ready) return null;
+
+  return <Stack screenOptions={{ headerShown: false }} />;
 }
