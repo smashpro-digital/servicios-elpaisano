@@ -12,7 +12,7 @@
 
     "ios": {
       "bundleIdentifier": "com.servicioselpaisano.app",
-      "buildNumber": "3",
+      "buildNumber": "2",
       "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
