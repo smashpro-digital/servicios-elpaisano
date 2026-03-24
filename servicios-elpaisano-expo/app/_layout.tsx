@@ -1,10 +1,11 @@
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { LanguageProvider } from "../hooks/useLanguage";
 
-SplashScreen.preventAutoHideAsync().catch(() => {
-  // ignore if it's already prevented
-});
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
@@ -19,7 +20,6 @@ export default function RootLayout() {
           setReady(true);
           await SplashScreen.hideAsync();
         } catch {
-          // if hide fails, allow app to continue anyway
           if (isMounted) setReady(true);
         }
       })();
@@ -33,5 +33,17 @@ export default function RootLayout() {
 
   if (!ready) return null;
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <SafeAreaProvider>
+      <LanguageProvider>
+        <StatusBar style="light" />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: { backgroundColor: "#f3f6fb" },
+          }}
+        />
+      </LanguageProvider>
+    </SafeAreaProvider>
+  );
 }

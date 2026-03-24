@@ -1,0 +1,134 @@
+{
+  "home": {
+    "slides": [
+      {
+        "id": "home-1",
+        "eyebrow": {
+          "en": "SERVICIOS EL PAISANO",
+          "es": "SERVICIOS EL PAISANO"
+        },
+        "title": {
+          "en": "Servicios El Paisano",
+          "es": "Servicios El Paisano"
+        },
+        "subtitle": {
+          "en": "Serving the Chattanooga community with multiple services in English and Spanish.",
+          "es": "Sirviendo a la comunidad de Chattanooga con múltiples servicios en inglés y español."
+        },
+        "imageSrc": ""
+      },
+      {
+        "id": "home-2",
+        "eyebrow": {
+          "en": "FEATURED SERVICE",
+          "es": "SERVICIO DESTACADO"
+        },
+        "title": {
+          "en": "Taxes & Filing Support",
+          "es": "Impuestos y Ayuda con Declaraciones"
+        },
+        "subtitle": {
+          "en": "Tax preparation, filing help, and seasonal assistance for individuals and families.",
+          "es": "Preparación de impuestos, ayuda con declaraciones y asistencia de temporada para personas y familias."
+        },
+        "imageSrc": ""
+      },
+      {
+        "id": "home-3",
+        "eyebrow": {
+          "en": "COMMUNITY SERVICES",
+          "es": "SERVICIOS COMUNITARIOS"
+        },
+        "title": {
+          "en": "Translation, Notary & More",
+          "es": "Traducción, Notaría y Más"
+        },
+        "subtitle": {
+          "en": "Fast access to translation, money transfer, phones, tags and titles, and more.",
+          "es": "Acceso rápido a traducciones, transferencias de dinero, teléfonos, placas y títulos, y más."
+        },
+        "imageSrc": ""
+      }
+    ],
+    "promo": {
+      "badge": {
+        "en": "20 YEAR",
+        "es": "20 AÑOS"
+      },
+      "title": {
+        "en": "TAXES",
+        "es": "IMPUESTOS"
+      },
+      "subtitle": {
+        "en": "Now with coupon!",
+        "es": "¡Ahora con cupón!"
+      },
+      "buttonLabel": {
+        "en": "View Services",
+        "es": "Ver Servicios"
+      }
+    }
+  },
+  "quickActions": [
+    {
+      "label": { "en": "Taxes", "es": "Impuestos" },
+      "route": "/services"
+    },
+    {
+      "label": { "en": "Translation", "es": "Traducción" },
+      "route": "/services"
+    },
+    {
+      "label": { "en": "Money Transfer", "es": "Transferencias" },
+      "route": "/services"
+    },
+    {
+      "label": { "en": "Notary", "es": "Notaría" },
+      "route": "/services"
+    },
+    {
+      "label": { "en": "Phones", "es": "Teléfonos" },
+      "route": "/services"
+    },
+    {
+      "label": { "en": "Tags & Titles", "es": "Placas y Títulos" },
+      "route": "/services"
+    }
+  ],
+  "office": {
+    "title": {
+      "en": "Office Information",
+      "es": "Información de la Oficina"
+    },
+    "hoursTitle": {
+      "en": "Office Hours",
+      "es": "Horario de Oficina"
+    },
+    "addressTitle": {
+      "en": "Office Location",
+      "es": "Ubicación"
+    },
+    "hours": {
+      "en": [
+        "Monday-Friday: 9:00 AM - 6:00 PM",
+        "Saturday: 9:00 AM - 3:00 PM",
+        "Sunday: Closed"
+      ],
+      "es": [
+        "Lunes-Viernes: 9:00 AM - 6:00 PM",
+        "Sábado: 9:00 AM - 3:00 PM",
+        "Domingo: Cerrado"
+      ]
+    },
+    "address": {
+      "en": "2740 Dodds Ave, Chattanooga, TN",
+      "es": "2740 Dodds Ave, Chattanooga, TN"
+    },
+    "phone": "423-265-2528",
+    "email": "servicioselpaisano@gmail.com",
+    "directionsLabel": {
+      "en": "GET DIRECTIONS",
+      "es": "CÓMO LLEGAR"
+    }
+  }
+}

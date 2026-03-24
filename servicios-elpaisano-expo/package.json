@@ -2,9 +2,12 @@
   "name": "servicios-elpaisano-expo",
   "main": "expo-router/entry",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "start": "expo start",
+    "start:clear": "expo start -c",
     "reset-project": "node ./scripts/reset-project.js",
+    "sync:site": "node ./scripts/parse-site.mjs",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -40,9 +43,9 @@
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
-    "typescript": "~5.9.2",
+    "cheerio": "^1.0.0",
     "eslint": "^9.25.0",
-    "eslint-config-expo": "~10.0.0"
-  },
-  "private": true
+    "eslint-config-expo": "~10.0.0",
+    "typescript": "~5.9.2"
+  }
 }
