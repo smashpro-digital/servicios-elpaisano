@@ -1,93 +1,80 @@
 <div align="center">
 
 # 🌎 Servicios El Paisano  
-### Bilingual Website Project (English / Español)
+### Native Mobile App + Bilingual Platform (English / Español)
 
-A professional marketing site developed by **MediaFluent** for **Servicios El Paisano**, connecting local communities with trusted services.
+A modern, Google-compliant mobile experience built by **MediaFluent / SmashPro Digital** for **Servicios El Paisano** — empowering local communities with fast, accessible services.
 
-[![Status](https://img.shields.io/badge/status-in%20development-yellow.svg)](https://github.com/thesmashcoder/servicios-elpaisano)
-[![Client](https://img.shields.io/badge/client-Servicios%20El%20Paisano-blue.svg)]()
-[![Agency](https://img.shields.io/badge/agency-MediaFluent-purple.svg)]()
-[![Lead](https://img.shields.io/badge/lead-TheSmashCoder-green.svg)]()
+[![Status](https://img.shields.io/badge/status-active%20development-success.svg)]()
+[![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android-blue.svg)]()
+[![Architecture](https://img.shields.io/badge/architecture-native%20expo%20router-purple.svg)]()
+[![Bilingual](https://img.shields.io/badge/language-EN%20%7C%20ES-green.svg)]()
 
 </div>
 
 ---
 
-## 🧭 Project Overview
-**Servicios El Paisano** will feature **4 English pages** and **4 mirrored Spanish pages**, built for speed, clarity, and easy maintenance.
+## 🚀 What This Project Is
 
-- **Frontend:** Next.js (React)
-- **Backend:** Express or FastAPI (lightweight API for contact form)
-- **Hosting:** To be finalized (Vercel or AWS Lightsail)
-- **Version Control:** GitHub (`main` → production, `develop` → staging)
+This is a **full mobile platform transformation** — evolving from a basic website wrapper into a **true native application** that meets modern **Google Play & App Store standards**.
 
----
-
-## 🤝 Project Roles
-| Role | Person | Organization |
-|------|---------|---------------|
-| 🧑‍💼 Client | Servicios El Paisano | End Client |
-| 🧑‍💻 Liaison / PM | Jim | MediaFluent |
-| 🧠 Tech Lead | Maurice (The Smash Coder) | SmashPro Digital LLC |
-| 🎨 Design / Content | TBD | MediaFluent + Client |
+Built for:
+- 📍 Local service businesses  
+- 🌐 Bilingual communities  
+- ⚡ Fast, mobile-first experiences  
 
 ---
 
-## 🚀 Next Steps
-1. Finalize brand assets & bilingual copy.
-2. Set up staging environment.
-3. Begin build sprint #1 (Home + About).
-4. QA bilingual navigation & SEO structure.
+## ✨ Key Features
+
+### 📱 Native Mobile Experience
+- Built with **Expo + React Native**
+- Smooth navigation (no WebView dependency)
+- Optimized for Android + iOS performance
+
+### 🌎 Bilingual by Design
+- Global EN / ES toggle
+- Fully mirrored content system
+- Seamless switching across all screens
+
+### 🧠 Dynamic Content Engine
+- JSON-driven content layer
+- Optional website parsing pipeline
+- Future-ready for API integration
+
+### 🖼 Smart Homepage Carousel
+- Dynamic images (from content source)
+- Local fallbacks for reliability
+- Auto-rotating + touch-controlled UX
+
+### ⚡ Business-First UX
+- Quick service access
+- Call + request flows
+- Location + hours surfaced instantly
 
 ---
 
-## 📞 Communication
-- **Zoom Kickoff:** Nov 7, 2025 @ 2:00 PM ET (Meeting ID 472 101 3362 / Passcode 9CVgmD)  
-- **Primary Contact:** Jim (MediaFluent)  
-- **Technical Contact:** Maurice (@thesmashcoder)  
+## 🧩 Architecture Overview
 
----
-
-> 🛠️ *This repository is private and maintained by MediaFluent on behalf of Servicios El Paisano.*
-
-# Servicios El Paisano — Website Project
-
-This repository contains the code and project assets for **Servicios El Paisano**.  
-**Agency:** MediaFluent · **Client:** Servicios El Paisano · **Liaison:** Jim (MediaFluent) · **Project Lead:** Maurice
-
-## Overview
-A bilingual (English/Spanish) marketing site: 4 core pages in English and 4 mirrored pages in Spanish.
-Stack TBD (recommended: Next.js frontend + lightweight backend or serverless for forms).
-
-## Stakeholders
-- **Client (Decision Maker):** Servicios El Paisano
-- **Agency (Delivery):** MediaFluent
-- **Liaison / PM:** Jim (MediaFluent)
-- **Project Lead / Tech:** Maurice
-- **Design:** TBD
-- **Content:** Client + Agency
-
-## Environments
-- `main` → production
-- `develop` → staging
-- Feature branches: `feat/<short-name>`
-
-## Getting Started
 ```bash
-# clone
-git clone <REPO_URL> servicios-elpaisano
-cd servicios-elpaisano
+app/
+├── index.tsx        # Home (carousel + business info)
+├── services.tsx     # Service listings
+├── request.tsx      # Request form
+├── contact.tsx      # Contact + location
 
-# (frontend)
-cd frontend && npm install && npm run dev
-# (backend)
-cd ../backend && # add your framework of choice
-```
-## Communication
-- Primary: Email + Zoom
-- Issues & tasks: GitHub Issues/Projects
-- Urgent: Phone/Slack (if configured)
+components/
+├── Shell.tsx        # UI system (header, tabs, cards)
 
-## License
-Private • All rights reserved (unless a LICENSE is added).
+hooks/
+├── useLanguage.tsx  # Global EN/ES state
+├── useSiteContent.ts
+
+services/
+├── content.ts       # Content resolver (tText)
+
+data/
+├── site-content.json  # Source of truth
+
+scripts/
+├── parse-site.mjs   # Website → JSON pipeline
