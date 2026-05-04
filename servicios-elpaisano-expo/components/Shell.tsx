@@ -1,5 +1,6 @@
 import { PropsWithChildren, ReactNode } from "react";
 import { router } from "expo-router";
+import * as Haptics from "expo-haptics";
 import {
   ScrollView,
   StyleSheet,
@@ -25,6 +26,12 @@ const COLORS = {
   borderSoft: "#e6edf5",
   tabInactive: "#8a97a8",
 };
+
+function triggerNavHaptic() {
+  if (process.env.EXPO_OS === "web") return;
+
+  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+}
 
 export function ScreenShell({
   children,
@@ -69,6 +76,7 @@ export function AppHeader({
 
       <View style={styles.languageSwitch}>
         <Pressable
+          onPressIn={triggerNavHaptic}
           onPress={() => setLanguage("en")}
           style={[
             styles.languageOption,
@@ -86,6 +94,7 @@ export function AppHeader({
         </Pressable>
 
         <Pressable
+          onPressIn={triggerNavHaptic}
           onPress={() => setLanguage("es")}
           style={[
             styles.languageOption,
@@ -150,6 +159,7 @@ export function BottomTabs({
           return (
             <Pressable
               key={item.key}
+              onPressIn={triggerNavHaptic}
               style={({ pressed }) => [
                 styles.tabItem,
                 isActive && styles.tabItemActive,

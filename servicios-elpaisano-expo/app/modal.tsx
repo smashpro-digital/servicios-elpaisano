@@ -1,5 +1,6 @@
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ModalScreen() {
   return (
@@ -7,11 +8,10 @@ export default function ModalScreen() {
       <View style={styles.container}>
         <View style={styles.card}>
           <Text style={styles.eyebrow}>Servicios El Paisano</Text>
-          <Text style={styles.title}>More Info</Text>
+          <Text style={styles.title}>Office Notice</Text>
           <Text style={styles.body}>
-            This modal is now part of the native app shell. You can use it later
-            for promotions, service details, office notices, bilingual help, or
-            seasonal updates.
+            Call or visit the office for current seasonal service updates,
+            bilingual support, and document requirements before your visit.
           </Text>
 
           <Pressable style={styles.primaryButton} onPress={() => router.back()}>

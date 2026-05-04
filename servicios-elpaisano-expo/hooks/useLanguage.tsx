@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useMemo, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 type Language = "en" | "es";
 
@@ -9,6 +16,7 @@ type LanguageContextType = {
 };
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
+const LANGUAGE_KEY = "servicios.language.v1";
 
 export function LanguageProvider({
   children,
@@ -17,12 +25,36 @@ export function LanguageProvider({
 }) {
   const [language, setLanguage] = useState<Language>("en");
 
+  useEffect(() => {
+    let isMounted = true;
+
+    AsyncStorage.getItem(LANGUAGE_KEY)
+      .then((storedLanguage) => {
+        if (
+          isMounted &&
+          (storedLanguage === "en" || storedLanguage === "es")
+        ) {
+          setLanguage(storedLanguage);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const persistLanguage = (nextLanguage: Language) => {
+    setLanguage(nextLanguage);
+    AsyncStorage.setItem(LANGUAGE_KEY, nextLanguage).catch(() => {});
+  };
+
   const value = useMemo(
     () => ({
       language,
-      setLanguage,
+      setLanguage: persistLanguage,
       toggleLanguage: () =>
-        setLanguage((prev) => (prev === "en" ? "es" : "en")),
+        persistLanguage(language === "en" ? "es" : "en"),
     }),
     [language]
   );

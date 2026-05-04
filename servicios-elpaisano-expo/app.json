@@ -15,7 +15,9 @@
       "buildNumber": "2",
       "supportsTablet": true,
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Allow Servicios El Paisano to attach photos to service requests.",
+        "NSPhotoLibraryUsageDescription": "Allow Servicios El Paisano to attach photos to service requests."
       }
     },
 
@@ -29,7 +31,14 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "CAMERA",
+        "POST_NOTIFICATIONS"
+      ],
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
 
     "web": {
@@ -39,15 +48,26 @@
 
     "plugins": [
       "expo-router",
+      "expo-document-picker",
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Allow Servicios El Paisano to attach photos to service requests.",
+          "photosPermission": "Allow Servicios El Paisano to attach selected photos to service requests.",
+          "microphonePermission": false
+        }
+      ],
+      "expo-notifications",
       [
         "expo-splash-screen",
   {
-    "image": "./assets/images/splash.png",
+    "image": "./assets/images/splash-luxury.png",
     "imageWidth": 360,
     "resizeMode": "contain",
-    "backgroundColor": "#F4F6F8",
+    "backgroundColor": "#0A1A30",
     "dark": {
-      "backgroundColor": "#0B0F14"
+      "image": "./assets/images/splash-luxury.png",
+      "backgroundColor": "#0A1A30"
     }
         }
       ]
