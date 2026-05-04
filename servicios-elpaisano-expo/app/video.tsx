@@ -1,5 +1,6 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { ActivityIndicator, Pressable, Text, View } from "react-native";
+import React from "react";
+import { ActivityIndicator, Platform, Pressable, Text, View } from "react-native";
 import { WebView } from "react-native-webview";
 import { AppHeader, ScreenShell } from "../components/Shell";
 import { YOUTUBE_VIDEO_URL } from "../data/website";
@@ -67,7 +68,22 @@ export default function VideoScreen() {
               overflow: "hidden",
             }}
           >
-            {embedUrl ? (
+            {embedUrl && Platform.OS === "web" ? (
+              React.createElement("iframe", {
+                src: embedUrl,
+                title: "Servicios El Paisano YouTube video",
+                allow:
+                  "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+                allowFullScreen: true,
+                style: {
+                  width: "100%",
+                  height: 230,
+                  border: 0,
+                  display: "block",
+                  backgroundColor: "#000000",
+                },
+              })
+            ) : embedUrl ? (
               <WebView
                 source={{ uri: embedUrl }}
                 allowsFullscreenVideo
