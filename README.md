@@ -1,93 +1,132 @@
 <div align="center">
+  <img src="./servicios-elpaisano-expo/assets/images/icon.png" alt="Servicios El Paisano app icon" width="112" />
 
-# 🌎 Servicios El Paisano  
-### Bilingual Website Project (English / Español)
+  # Servicios El Paisano
 
-A professional marketing site developed by **MediaFluent** for **Servicios El Paisano**, connecting local communities with trusted services.
+  Bilingual Expo app for community services, document support, tax help, contact actions, offline requests, and live website-backed content.
 
-[![Status](https://img.shields.io/badge/status-in%20development-yellow.svg)](https://github.com/thesmashcoder/servicios-elpaisano)
-[![Client](https://img.shields.io/badge/client-Servicios%20El%20Paisano-blue.svg)]()
-[![Agency](https://img.shields.io/badge/agency-MediaFluent-purple.svg)]()
-[![Lead](https://img.shields.io/badge/lead-TheSmashCoder-green.svg)]()
-
+  <p>
+    <img alt="Expo" src="https://img.shields.io/badge/Expo-SDK%2054-143b73?style=for-the-badge&logo=expo&logoColor=white" />
+    <img alt="React Native" src="https://img.shields.io/badge/React%20Native-0.81-1f56a6?style=for-the-badge&logo=react&logoColor=white" />
+    <img alt="Status" src="https://img.shields.io/badge/Active%20Project-Expo%20App-d7b45f?style=for-the-badge" />
+  </p>
 </div>
 
 ---
 
-## 🧭 Project Overview
-**Servicios El Paisano** will feature **4 English pages** and **4 mirrored Spanish pages**, built for speed, clarity, and easy maintenance.
+## App Preview
 
-- **Frontend:** Next.js (React)
-- **Backend:** Express or FastAPI (lightweight API for contact form)
-- **Hosting:** To be finalized (Vercel or AWS Lightsail)
-- **Version Control:** GitHub (`main` → production, `develop` → staging)
+| Home | Services | Request |
+| --- | --- | --- |
+| <img src="./docs/screenshots/home.png" alt="Home screen screenshot" width="220" /> | <img src="./docs/screenshots/services.png" alt="Services screen screenshot" width="220" /> | <img src="./docs/screenshots/request.png" alt="Request service screen screenshot" width="220" /> |
 
----
+| Contact | Video |
+| --- | --- |
+| <img src="./docs/screenshots/contact.png" alt="Contact screen screenshot" width="220" /> | <img src="./docs/screenshots/video.png" alt="In-app video screen screenshot" width="220" /> |
 
-## 🤝 Project Roles
-| Role | Person | Organization |
-|------|---------|---------------|
-| 🧑‍💼 Client | Servicios El Paisano | End Client |
-| 🧑‍💻 Liaison / PM | Jim | MediaFluent |
-| 🧠 Tech Lead | Maurice (The Smash Coder) | MediaFluent |
-| 🎨 Design / Content | TBD | MediaFluent + Client |
+The app also includes an in-app YouTube screen, request form attachments, saved offline requests, bilingual content, native phone/email/maps actions, and live content refresh from the website.
 
----
+## Active Project
 
-## 🚀 Next Steps
-1. Finalize brand assets & bilingual copy.
-2. Set up staging environment.
-3. Begin build sprint #1 (Home + About).
-4. QA bilingual navigation & SEO structure.
-
----
-
-## 📞 Communication
-- **Zoom Kickoff:** Nov 7, 2025 @ 2:00 PM ET (Meeting ID 472 101 3362 / Passcode 9CVgmD)  
-- **Primary Contact:** Jim (MediaFluent)  
-- **Technical Contact:** Maurice (@thesmashcoder)  
-
----
-
-> 🛠️ *This repository is private and maintained by MediaFluent on behalf of Servicios El Paisano.*
-
-# Servicios El Paisano — Website Project
-
-This repository contains the code and project assets for **Servicios El Paisano**.  
-**Agency:** MediaFluent · **Client:** Servicios El Paisano · **Liaison:** Jim (MediaFluent) · **Project Lead:** Maurice
-
-## Overview
-A bilingual (English/Spanish) marketing site: 4 core pages in English and 4 mirrored pages in Spanish.
-Stack TBD (recommended: Next.js frontend + lightweight backend or serverless for forms).
-
-## Stakeholders
-- **Client (Decision Maker):** Servicios El Paisano
-- **Agency (Delivery):** MediaFluent
-- **Liaison / PM:** Jim (MediaFluent)
-- **Project Lead / Tech:** Maurice
-- **Design:** TBD
-- **Content:** Client + Agency
-
-## Environments
-- `main` → production
-- `develop` → staging
-- Feature branches: `feat/<short-name>`
-
-## Getting Started
 ```bash
-# clone
-git clone <REPO_URL> servicios-elpaisano
-cd servicios-elpaisano
-
-# (frontend)
-cd frontend && npm install && npm run dev
-# (backend)
-cd ../backend && # add your framework of choice
+npm install
+npm run start
 ```
-## Communication
-- Primary: Email + Zoom
-- Issues & tasks: GitHub Issues/Projects
-- Urgent: Phone/Slack (if configured)
 
-## License
-Private • All rights reserved (unless a LICENSE is added).
+The active app lives in:
+
+```text
+servicios-elpaisano-expo
+```
+
+New VS Code terminals are configured to open there automatically, so direct commands like `npx expo start` work without changing folders.
+
+## Root Commands
+
+Run these from the repo root:
+
+```bash
+npm run start
+npm run start:clear
+npm run lint
+npm run typecheck
+npm run export:web
+npm run sync:site
+npm run expo -- --version
+npm run screenshots
+```
+
+## Feature Map
+
+| Area | Status |
+| --- | --- |
+| Bilingual English/Spanish UI | Implemented |
+| Live website-backed content | Implemented via `app-content.json` |
+| Service request form | Implemented |
+| Camera/photo attachments | Implemented |
+| Document picker attachments | Implemented |
+| Offline saved requests | Implemented |
+| Native phone, email, maps, share | Implemented |
+| In-app YouTube video | Implemented with `react-native-webview` |
+| Expo Go notification guard | Implemented |
+| Archived web wrapper | Moved to `archive/frontend-next-wrapper` |
+
+## Live Content
+
+The app reads live content from:
+
+```text
+https://servicioselpaisano.com/app-content.json
+```
+
+The phone app uses this order:
+
+1. Bundled fallback content.
+2. Cached server content.
+3. Fresh server content.
+
+See:
+
+```text
+servicios-elpaisano-expo/docs/live-content.md
+```
+
+## Project Layout
+
+```text
+.
+├── servicios-elpaisano-expo/      # Active Expo native app
+├── archive/frontend-next-wrapper/ # Archived Next.js/Capacitor wrapper
+├── docs/                          # Project docs
+│   └── screenshots/               # README app screenshots
+├── scripts/                       # Legacy/root helper scripts
+└── package.json                   # Root command shortcuts into Expo
+```
+
+## Screenshots
+
+Regenerate the README screenshots after meaningful UI changes:
+
+```bash
+npm run export:web
+npm run screenshots
+```
+
+The screenshot script serves the Expo web export locally and captures mobile-sized
+screens with Playwright.
+
+## Archived Project
+
+The previous Next.js/Capacitor web wrapper is retained for reference only:
+
+```text
+archive/frontend-next-wrapper
+```
+
+Do not use it for active app development unless the project direction changes back to a web wrapper.
+
+## Notes
+
+- Keep native WebView code inside the Expo app.
+- Keep live content public and non-secret.
+- Use `npm run start:clear` if Metro keeps stale cached app content during development.

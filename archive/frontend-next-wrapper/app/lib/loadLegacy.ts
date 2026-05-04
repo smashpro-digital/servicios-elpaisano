@@ -78,7 +78,7 @@ function rewriteStyleUrls(html: string): string {
  */
 export async function loadLegacyMain(filename: string): Promise<string> {
   const filePath = path.join(process.cwd(), "public", "legacy", filename);
-  let raw = await fs.readFile(filePath, "utf8");
+  const raw = await fs.readFile(filePath, "utf8");
 
   // Prefer content between <!-- Main --> and <!-- Footer -->
   const startIdx = raw.indexOf("<!-- Main -->");

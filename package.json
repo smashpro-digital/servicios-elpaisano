@@ -1,0 +1,21 @@
+{
+  "name": "servicios-elpaisano-workspace",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix servicios-elpaisano-expo run start",
+    "start:clear": "npm --prefix servicios-elpaisano-expo run start:clear",
+    "android": "npm --prefix servicios-elpaisano-expo run android",
+    "ios": "npm --prefix servicios-elpaisano-expo run ios",
+    "web": "npm --prefix servicios-elpaisano-expo run web",
+    "lint": "npm --prefix servicios-elpaisano-expo run lint",
+    "typecheck": "npm --prefix servicios-elpaisano-expo run typecheck",
+    "export:web": "npm --prefix servicios-elpaisano-expo run export:web",
+    "sync:site": "npm --prefix servicios-elpaisano-expo run sync:site",
+    "sync:site:server": "npm --prefix servicios-elpaisano-expo run sync:site:server",
+    "screenshots": "node scripts/capture-expo-screenshots.mjs",
+    "expo": "npm --prefix servicios-elpaisano-expo exec -- expo"
+  },
+  "devDependencies": {
+    "playwright": "^1.59.1"
+  }
+}

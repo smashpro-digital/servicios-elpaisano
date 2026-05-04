@@ -1,0 +1,9 @@
+{
+  "terminal.integrated.cwd": "${workspaceFolder}/servicios-elpaisano-expo",
+  "eslint.workingDirectories": [
+    {
+      "directory": "servicios-elpaisano-expo",
+      "changeProcessCWD": true
+    }
+  ]
+}
