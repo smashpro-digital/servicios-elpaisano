@@ -1,0 +1,14 @@
+################################
+# Backend / PHP (ignore entirely)
+################################
+/vendor/
+/composer.json
+/composer.lock
+
+################################
+# Global junk
+################################
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

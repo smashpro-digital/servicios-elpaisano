@@ -1,0 +1,23 @@
+# Default: keep text files normalized
+* text=auto
+
+# iOS / macOS native files — force LF
+*.swift          text eol=lf
+*.plist          text eol=lf
+*.storyboard     text eol=lf
+*.xib            text eol=lf
+*.pbxproj        text eol=lf
+*.xcworkspacedata text eol=lf
+*.xcconfig       text eol=lf
+*.entitlements   text eol=lf
+
+# Android / Gradle — LF
+*.gradle         text eol=lf
+*.kt             text eol=lf
+
+# Scripts
+*.sh             text eol=lf
+
+# Windows scripts
+*.ps1            text eol=crlf
+*.bat            text eol=crlf
