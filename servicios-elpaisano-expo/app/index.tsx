@@ -64,6 +64,25 @@ type SlideItem = {
   eyebrow?: { en: string; es: string };
 };
 
+const QUICK_ACTION_SERVICE_TARGETS: Record<string, string> = {
+  taxes: "Tax preparation and e-filing",
+  impuestos: "Tax preparation and e-filing",
+  translation: "Translation",
+  traduccion: "Translation",
+  moneytransfer: "Money transfers",
+  transferencias: "Money transfers",
+  notary: "Notary",
+  notaria: "Notary",
+  passports: "Passports and passport photos",
+  pasaportes: "Passports and passport photos",
+  billpay: "Bill pay",
+  pagodefacturas: "Bill pay",
+};
+
+function normalizeQuickAction(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
 function requestService(service?: string, language?: "en" | "es") {
   router.push({
     pathname: "/request",
@@ -72,6 +91,29 @@ function requestService(service?: string, language?: "en" | "es") {
       ...(language ? { lang: language } : {}),
     },
   });
+}
+
+function openQuickAction(
+  route: string | undefined,
+  label: string,
+  language: "en" | "es"
+) {
+  const nextRoute = route || "/services";
+
+  if (nextRoute === "/services") {
+    const target = QUICK_ACTION_SERVICE_TARGETS[normalizeQuickAction(label)];
+
+    router.push({
+      pathname: "/services",
+      params: {
+        ...(target ? { target } : {}),
+        lang: language,
+      },
+    } as any);
+    return;
+  }
+
+  router.push(nextRoute as any);
 }
 
 function getLocalFallback(index: number): ImageSourcePropType {
@@ -992,7 +1034,13 @@ export default function Index() {
                 <QuickActionItem
                   key={tText(item.label, language)}
                   label={tText(item.label, language)}
-                  onPress={() => router.push((item.route || "/services") as any)}
+                  onPress={() =>
+                    openQuickAction(
+                      item.route,
+                      tText(item.label, language),
+                      language
+                    )
+                  }
                 />
               ))}
               <QuickActionItem

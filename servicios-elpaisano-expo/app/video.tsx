@@ -3,7 +3,7 @@ import React from "react";
 import { ActivityIndicator, Platform, Pressable, Text, View } from "react-native";
 import { WebView } from "react-native-webview";
 import { AppHeader, ScreenShell } from "../components/Shell";
-import { YOUTUBE_VIDEO_URL } from "../data/website";
+import { WEBSITE_BASE_URL, YOUTUBE_VIDEO_URL } from "../data/website";
 import { useLanguage } from "../hooks/useLanguage";
 import { openExternalUrl } from "../services/native";
 
@@ -16,6 +16,8 @@ const COLORS = {
   border: "#dbe4f0",
 };
 
+const VIDEO_REFERRER_ORIGIN = WEBSITE_BASE_URL;
+
 function getYouTubeId(url: string) {
   const match = url.match(/(?:youtu\.be\/|v=|embed\/)([A-Za-z0-9_-]{6,})/);
   return match?.[1] || null;
@@ -24,7 +26,52 @@ function getYouTubeId(url: string) {
 function getEmbedUrl(url: string) {
   const videoId = getYouTubeId(url);
   if (!videoId) return null;
-  return `https://www.youtube.com/embed/${videoId}?playsinline=1&rel=0&modestbranding=1`;
+
+  const params = new URLSearchParams({
+    playsinline: "1",
+    rel: "0",
+    modestbranding: "1",
+    origin: VIDEO_REFERRER_ORIGIN,
+    widget_referrer: VIDEO_REFERRER_ORIGIN,
+  });
+
+  return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+}
+
+function getEmbedHtml(embedUrl: string) {
+  return `<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
+      iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe
+      src="${embedUrl}"
+      title="Servicios El Paisano YouTube video"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+  </body>
+</html>`;
 }
 
 export default function VideoScreen() {
@@ -75,6 +122,7 @@ export default function VideoScreen() {
                 allow:
                   "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
                 allowFullScreen: true,
+                referrerPolicy: "strict-origin-when-cross-origin",
                 style: {
                   width: "100%",
                   height: 230,
@@ -85,9 +133,14 @@ export default function VideoScreen() {
               })
             ) : embedUrl ? (
               <WebView
-                source={{ uri: embedUrl }}
+                source={{
+                  html: getEmbedHtml(embedUrl),
+                  baseUrl: VIDEO_REFERRER_ORIGIN,
+                }}
+                originWhitelist={["https://*", "about:blank"]}
                 allowsFullscreenVideo
-                mediaPlaybackRequiresUserAction
+                allowsInlineMediaPlayback
+                mediaPlaybackRequiresUserAction={false}
                 javaScriptEnabled
                 domStorageEnabled
                 startInLoadingState

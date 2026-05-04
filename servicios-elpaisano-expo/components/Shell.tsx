@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { forwardRef, PropsWithChildren, ReactNode } from "react";
 import { router } from "expo-router";
 import * as Haptics from "expo-haptics";
 import {
@@ -33,10 +33,13 @@ function triggerNavHaptic() {
   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
 }
 
-export function ScreenShell({
+export const ScreenShell = forwardRef<
+  ScrollView,
+  PropsWithChildren<{ scroll?: boolean }>
+>(function ScreenShell({
   children,
   scroll = true,
-}: PropsWithChildren<{ scroll?: boolean }>) {
+}, ref) {
   const insets = useSafeAreaInsets();
 
   const content = (
@@ -47,6 +50,7 @@ export function ScreenShell({
 
   return scroll ? (
     <ScrollView
+      ref={ref}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.scrollContent}
     >
@@ -55,7 +59,7 @@ export function ScreenShell({
   ) : (
     content
   );
-}
+});
 
 export function AppHeader({
   title,

@@ -5,9 +5,6 @@ import {
   BottomTabs,
   ScreenShell,
 } from "../components/Shell";
-import { useLanguage } from "../hooks/useLanguage";
-import { SERVICE_CATEGORIES, WEBSITE_SERVICES } from "../data/website";
-import { useSiteContent } from "../hooks/useSiteContent";
 
 const COLORS = {
   bg: "#f3f6fb",
@@ -22,6 +19,49 @@ const COLORS = {
   quickBg: "#eef3fb",
   border: "#dbe4f0",
 };
+
+const categories = [
+  "All",
+  "Taxes",
+  "Translation",
+  "Notary",
+  "Phones",
+];
+
+const services = [
+  {
+    title: "Taxes",
+    subtitle: "Tax preparation, filing, and general support.",
+  },
+  {
+    title: "Translation",
+    subtitle: "English and Spanish document translation services.",
+  },
+  {
+    title: "Money Transfer",
+    subtitle: "Send or receive money quickly and securely.",
+  },
+  {
+    title: "Notary",
+    subtitle: "Document notarization and form support.",
+  },
+  {
+    title: "Phones",
+    subtitle: "Phone plans, SIM cards, and mobile help.",
+  },
+  {
+    title: "Tags & Titles",
+    subtitle: "Vehicle registration, titles, and plates assistance.",
+  },
+  {
+    title: "Insurance",
+    subtitle: "General information and assistance with coverage options.",
+  },
+  {
+    title: "Travel Tickets",
+    subtitle: "Help booking bus and flight tickets.",
+  },
+];
 
 function Card({
   title,
@@ -62,7 +102,7 @@ function Card({
   );
 }
 
-function SummaryBar({ label }: { label: string }) {
+function SearchBar() {
   return (
     <View
       style={{
@@ -81,7 +121,7 @@ function SummaryBar({ label }: { label: string }) {
           fontSize: 16,
         }}
       >
-        {label}
+        Search services...
       </Text>
     </View>
   );
@@ -122,22 +162,13 @@ function Chip({
 function ServiceCard({
   title,
   subtitle,
-  ctaLabel,
-  serviceValue,
 }: {
   title: string;
   subtitle: string;
-  ctaLabel: string;
-  serviceValue: string;
 }) {
   return (
     <Pressable
-      onPress={() =>
-        router.push({
-          pathname: "/request",
-          params: { service: serviceValue },
-        })
-      }
+      onPress={() => router.push("/request")}
       style={({ pressed }) => ({
         backgroundColor: COLORS.white,
         borderRadius: 22,
@@ -156,7 +187,7 @@ function ServiceCard({
           marginBottom: 8,
         }}
       >
-        {title}
+        {title} 
       </Text>
 
       <Text
@@ -186,7 +217,7 @@ function ServiceCard({
             fontSize: 14,
           }}
         >
-          {ctaLabel}
+          Learn More
         </Text>
       </View>
     </Pressable>
@@ -194,25 +225,14 @@ function ServiceCard({
 }
 
 export default function ServicesScreen() {
-  const { language } = useLanguage();
-  const { content } = useSiteContent();
-  const categories = SERVICE_CATEGORIES[language];
-  const services = content.services?.length ? content.services : WEBSITE_SERVICES;
-
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.bg }}>
-      <AppHeader title={language === "es" ? "Servicios" : "Services"} />
+      <AppHeader title="Services" />
 
       <ScreenShell>
         <View style={{ gap: 18, paddingBottom: 120 }}>
           <Card>
-            <SummaryBar
-              label={
-                language === "es"
-                  ? "Traduccion, interpretacion, notaria, impuestos, telefonos, pagos, vehiculos, pasaportes y mas."
-                  : "Translation, interpretation, notary, taxes, phones, bill pay, vehicles, passports, and more."
-              }
-            />
+            <SearchBar />
 
             <ScrollView
               horizontal
@@ -238,16 +258,14 @@ export default function ServicesScreen() {
                 marginBottom: 14,
               }}
             >
-              {language === "es" ? "Servicios del Sitio Web" : "Website Services"}
+              Popular Services
             </Text>
 
             {services.map((service) => (
               <ServiceCard
-                key={service.title.en}
-                title={service.title[language]}
-                subtitle={service.subtitle[language]}
-                ctaLabel={language === "es" ? "Solicitar Servicio" : "Request Service"}
-                serviceValue={service.title.en}
+                key={service.title}
+                title={service.title}
+                subtitle={service.subtitle}
               />
             ))}
           </Card>
